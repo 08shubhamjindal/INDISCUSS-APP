@@ -39,7 +39,7 @@ handleData(){
   }
   }
   else{
-    return 'Hi Data is Loading'
+    return 'Hi Data is Loading yet'
   }
 }
 
