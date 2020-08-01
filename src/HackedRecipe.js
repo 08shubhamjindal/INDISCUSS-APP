@@ -29,7 +29,7 @@ handleData() {
         return (
             this.state.data.map((cardData, index)=>{
                 const cond = this.state.searchArray.includes(index) ? true : false
-                return <Card sendParticularCard = {cardData} afterSearchData = {cond}/>
+                return <Card sendParticularCard = {cardData} afterSearchData = {cond} index = {index}/>
             })
         )
     }
@@ -69,22 +69,28 @@ class SearchBar extends React.Component{
 class Card extends React.Component{
     render(){
         const mystyle = {
+            float: this.props.index %2 ==0 ? "left" : "right",
             color: "black",
-            backgroundColor: this.props.afterSearchData ? "green" : "DodgerBlue" ,
-            height: "100px",
+           // backgroundColor: this.props.afterSearchData ? "green" : "DodgerBlue" ,
+            height: "auto",
             fontFamily: "Arial",
-            margin: "20px",
-            padding: "0 7px 0 7px",
+            margin: "10px",
             transition: "0.3s",
             width: "40%",
-            boxshadow: "0 4px 8px 0 rgba(0,0,0,0.2)"
+            boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
+            textAlign: "center",
           };
+         const priceStyle = {
+                color: "grey",
+                fontSize: "22px"
+         }
         console.log( 'hie' + this.props.afterSearchData)
         return (
             <div style={mystyle}>
             <div>{this.props.sendParticularCard.id + 1}.</div>
             <img src={this.props.sendParticularCard.image} />
-            <div>{this.props.sendParticularCard.name}</div>
+            <h1>{this.props.sendParticularCard.name}</h1>
+            <p class="price" style = {priceStyle}>${this.props.sendParticularCard.price}</p>
             <div>{this.props.sendParticularCard.description}</div>
             </div>
         )
