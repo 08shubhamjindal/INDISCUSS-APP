@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 class HackedRecipe extends React.Component {
     constructor(props){
@@ -10,7 +10,7 @@ class HackedRecipe extends React.Component {
             data : null,
             searchArray : []
         }
-    }
+ }
 
 async componentDidMount() {
         let url = 'http://starlord.hackerearth.com/recipe';
@@ -56,10 +56,26 @@ render(){
 }
 }
 class SearchBar extends React.Component{
+    
  render(){
+    const search =  {
+        width: "100%",
+        position: "relative",
+        display: "flex"
+      }
+      const searchTerm  = {
+        width: "70%",
+        border: "3px solid #00B4CC",
+        borderRight: "none",
+        padding: "5px",
+        height: "20px",
+        borderRadius: "5px 0 0 5px",
+        outline: "none",
+        color: "#9DBFAF"
+      }
      return(
-         <div>
-             <input type="text" id="input"></input>
+         <div style = {search}>
+             <input style = {searchTerm} type="text" id="input"></input>
              <button onClick = {this.props.searchData}>Search</button>
          </div>
      )
@@ -67,11 +83,14 @@ class SearchBar extends React.Component{
 }
 
 class Card extends React.Component{
+    getDetails(){
+        window.open('http://127.0.0.1:8080/')
+    }
     render(){
         const mystyle = {
             float: this.props.index %2 ==0 ? "left" : "right",
             color: "black",
-           // backgroundColor: this.props.afterSearchData ? "green" : "DodgerBlue" ,
+            backgroundColor: this.props.afterSearchData ? "green" : "white" ,
             height: "auto",
             fontFamily: "Arial",
             margin: "10px",
@@ -92,14 +111,25 @@ class Card extends React.Component{
             <h1>{this.props.sendParticularCard.name}</h1>
             <p class="price" style = {priceStyle}>${this.props.sendParticularCard.price}</p>
             <div>{this.props.sendParticularCard.description}</div>
+            <button onClick= {this.getDetails}>Get Details</button>
             </div>
+        )
+    }
+}
+class Details extends React.Component{
+    render(){
+        return (
+            <div>Jai ----------</div>
         )
     }
 }
 
 const jsx = (
-    <div>
-        <HackedRecipe />
-    </div>
+        <BrowserRouter >
+        <Switch>
+        <Route path ="/" component={HackedRecipe} exact={true}/>
+        <Route path ="/a" component={Details} exact={true}/>
+        </Switch>
+        </BrowserRouter>
 )
 ReactDOM.render(jsx, document.getElementById('app'));

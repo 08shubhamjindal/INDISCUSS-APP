@@ -3,6 +3,7 @@ module.exports = {
     entry : './src/HackedRecipe.js',
     output: {
         path : path.join(__dirname, 'public'),
+        publicPath: '/',
         filename : 'bundle.js'
     },
     module: {
@@ -15,7 +16,8 @@ module.exports = {
           ]
     },
     devServer: {
-      host:'000.000.00.00',
-      port: 8888
+        contentBase: path.join(__dirname, 'public'),
+        watchContentBase: true,
+        historyApiFallback: true
     },
 }
